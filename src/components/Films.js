@@ -20,7 +20,7 @@ export default function Films({data}) {
                                     <strong>Director:</strong>
                                     <p>{films?.director}</p>
                                     <strong>Producer:</strong>
-                                    <p>{films?.Producer}</p>
+                                    <p>{films?.producer}</p>
                                     <strong>Release Date</strong>
                                     <p>{films?.release_date}</p>
                                 </Card.Description>
