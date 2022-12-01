@@ -7,35 +7,25 @@ export default function Films({data}) {
         <Grid columns={4}>
             {data.map((films, i) => {
                 return (<Grid.Column key={i}>
-                        <Card>
+                        {films && <Card>
                             <Card.Content>
                                 <CardHeader>
-                                    {films.title}
+                                    {films?.title}
                                 </CardHeader>
                                 <Card.Description>
                                     <strong>Episode ID:</strong>
-                                    <p>{films.episode_id}</p>
+                                    <p>{films?.episode_id}</p>
                                     <strong>Crawl:</strong>
-                                    <p>{films.opening_crawl}</p>
+                                    <p>{films?.opening_crawl}</p>
                                     <strong>Director:</strong>
-                                    <p>{films.director}</p>
+                                    <p>{films?.director}</p>
                                     <strong>Producer:</strong>
-                                    <p>{films.Producer}</p>
+                                    <p>{films?.Producer}</p>
                                     <strong>Release Date</strong>
-                                    <p>{films.release_date}</p>
-                                    <strong>Characters:</strong>
-                                    <p>{films.characters}</p>
-                                    <strong>Planets:</strong>
-                                    <p>{films.planets}</p>
-                                    <strong>Starships:</strong>
-                                    <p>{films.starships}</p>
-                                    <strong>Vehicles:</strong>
-                                    <p>{films.vehicles}</p>
-                                    <strong>Species:</strong>
-                                    <p>{films.species}</p>
+                                    <p>{films?.release_date}</p>
                                 </Card.Description>
                             </Card.Content>
-                        </Card>
+                        </Card>}
                     </Grid.Column>
                 )
             })}

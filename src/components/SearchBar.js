@@ -14,10 +14,3 @@ const SearchBar = ({keyword, onChange}) => {
 }
 
 export default SearchBar;
-/*
-const SearchBar = () => {
-    return (
-        <Search placeholder={"Search..."} size={"large"}/>
-    );
-};
- */

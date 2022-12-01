@@ -1,15 +1,23 @@
 import './App.css';
-import React, {useState, useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import {Container, Dimmer, Grid, GridRow, Loader} from "semantic-ui-react";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Container, Dimmer, Grid, Loader } from "semantic-ui-react";
 import Home from "./components/Home";
 import Films from "./components/Films";
-import SearchBar from "./components/SearchBar";
 
 function App() {
+    const [filter, setFilter] = useState('');
     const [films, setFilms] = useState([]);
     const [loading, setLoading] = useState(true);
+    const handleChange = event => {
+        setFilter(event.target.value);
+        setFilms(films.map((movie) => {
+            if (movie?.title?.toLowerCase().includes(filter?.toLowerCase())) {
+                return movie;
+            }
+        }))
+    };
     useEffect(() => {
         async function fetchFilms() {
             let res = await fetch('https://swapi.dev/api/films/?format=json');
@@ -26,7 +34,12 @@ function App() {
             <Container>
                 <Grid>
                     <Grid.Row centered>
-                        <SearchBar/>
+                        <input
+                            key="search-bar"
+                            value={filter}
+                            placeholder={"Search Films"}
+                            onChange={handleChange}
+                        />
                     </Grid.Row>
                 </Grid>
                 {loading ? (
@@ -36,7 +49,8 @@ function App() {
                 ) : (
                     <Routes>
                         <Route exact path='/' element={<Home/>}/>
-                        <Route exact path='/films' element={<Films data={films}/>}/>
+                        {films.length > 0 ? (<Route exact path='/films' element={<Films data={films}/>}/>) :
+                            (<div>Loading ...</div>)}
                     </Routes>
                 )}
             </Container>
